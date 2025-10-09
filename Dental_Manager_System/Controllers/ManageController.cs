@@ -9,6 +9,7 @@ using Microsoft.Owin.Security;
 using Dental_Manager_System.Models;
 
 namespace Dental_Manager_System.Controllers
+
 {
     [Authorize]
     public class ManageController : Controller

@@ -1,8 +1,9 @@
-﻿using System.Data.Entity;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using Dental_Manager.System.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Dental_Manager_System.Models
 {
@@ -21,7 +22,7 @@ namespace Dental_Manager_System.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("name = Dental_Manager_System", throwIfV1Schema: false)
         {
         }
 
@@ -29,5 +30,13 @@ namespace Dental_Manager_System.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<User> Users { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Consulation> Consulations { get; set; }
+        public DbSet<Medicine> Medicines { get; set; }
+        public DbSet<Patient_Record> Patient_Records { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<Prescription> Prescriptions { get; set; }
     }
 }
