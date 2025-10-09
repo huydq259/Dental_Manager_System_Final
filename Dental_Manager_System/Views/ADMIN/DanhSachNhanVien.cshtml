@@ -1,0 +1,167 @@
+﻿@{
+    ViewBag.Title = "DanhSachBacSi";
+    Layout = "/Views/Shared/LayoutClient.cshtml";
+}
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Nhân viên</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Quản lý nhân viên </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="fw-bold mb-3">Tạo thông tin Nhân viên</h3>
+                        <form class="row g-3">
+                            <div class="col-md-6">
+                                <label for="inputEmail4" class="form-label">Email(Tên tài khoản)</label>
+                                <input type="email" class="form-control" id="inputEmail4" placeholder="ABC@gmail.com">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputPassword4" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="inputPassword4" placeholder="*">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputAddress" class="form-label">Họ và Tên</label>
+                                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St ... ">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="formFileLg" class="form-label">Hình đại diện</label>
+                                <input class="form-control form-control-lg" id="formFileLg" type="file">
+                            </div>
+                            <div class="col-6">
+                                <label for="inputAddress2" class="form-label">Ngày tháng năm sinh</label>
+                                <input type="text" class="form-control" id="inputDateNV" placeholder="DD/MM/YY...">
+                            </div>
+                            <div class="col-6">
+                                <label for="inputAddress2" class="form-label">Số điện thoại</label>
+                                <input type="text" class="form-control" id="inputPhonenumberNV" placeholder="+84 ...">
+                            </div>
+                            <div class="col-6">
+                                <label for="inputAddress2" class="form-label">Số CCCD</label>
+                                <input type="text" class="form-control" id="inputCCCDNV" placeholder="CCCD 9 số hoặc 12 số ...">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label">Vị trí nhân sự</label>
+                                <select id="inputState" class="form-select">
+                                    <option selected>Chọn vị trí</option>
+                                    <option>Lễ tân</option>
+                                    <option>Nhân viên chăm sóc khách hàng</option>
+                                    <option>Nhân viên hành chính – nhân sự</option>
+                                    <option>Kế toán/thu ngân</option>
+                                    <option>Nhân viên dọn dẹp</option>
+                                    <option>Quản lý nhân sự</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputCity" class="form-label">Quản lý dịch vụ</label>
+                                <input type="text" class="form-control" id="inputCity" placeholder="Điền tên dịch vụ ...">
+                            </div>
+
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Tạo thông tin</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="fw-bold mb-3">Danh sách Nhân viên phòng khám</h3>
+                        <div style="display: flex; gap: 10px; margin-top: 10px;">
+                            <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button type="submit" class="btn btn-search pe-1">
+                                            <i class="fa fa-search search-icon"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text"
+                                           placeholder="Tìm kiếm nhân viên ... "
+                                           class="form-control" />
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="basic-datatables"
+                                   class="display table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Mã nhân viên</th>
+                                        <th>Tên nhân viên</th>
+                                        <th>Năm sinh</th>
+                                        <th>Vị trí</th>
+                                        <th>Hình đại diện</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>NV001</td>
+                                        <td>Đoàn Quang Huy</td>
+                                        <td>2004</td>
+                                        <td>Nhân viên lễ tân</td>
+                                        <td>ahihi.png</td>
+                                        <td>
+                                            <button style="background-color: #FFFF00; padding: 5px 10px; margin-right: 5px;">Sửa</button>
+                                            <button style="background-color: #FF0000; color: white; padding: 5px 10px;">Xóa</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>NV002</td>
+                                        <td>Đoàn Quang Huy</td>
+                                        <td>2004</td>
+                                        <td>Nhân viên dọn dẹp</td>
+                                        <td>ahihi.png</td>
+                                        <td>
+                                            <button style="background-color: #FFFF00; padding: 5px 10px; margin-right: 5px;">Sửa</button>
+                                            <button style="background-color: #FF0000; color: white; padding: 5px 10px;">Xóa</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>NV003</td>
+                                        <td>Nguyễn Văn A</td>
+                                        <td>1986</td>
+                                        <td>Quản lý</td>
+                                        <td>.png</td>
+                                        <td>
+                                            <button style="background-color: #FFFF00; padding: 5px 10px; margin-right: 5px;">Sửa</button>
+                                            <button style="background-color: #FF0000; color: white; padding: 5px 10px;">Xóa</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
