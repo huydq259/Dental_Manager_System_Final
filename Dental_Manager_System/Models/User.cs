@@ -31,7 +31,5 @@ namespace Dental_Manager.System.Models
         public DateTime CreatedAt { get; set; }
         [Required]
         public DateTime UpdatedAt { get; set; }
-
-
     }
 }

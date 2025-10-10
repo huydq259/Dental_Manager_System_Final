@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dental_Manager.System.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,8 +14,11 @@ namespace Dental_Manager_System.Controllers
         {
             return View();
         }
+
+        [HttpGet]
         public ActionResult DanhSachBacSi()
         {
+            
             return View();
         }
         public ActionResult LichLamViecBacSi()
