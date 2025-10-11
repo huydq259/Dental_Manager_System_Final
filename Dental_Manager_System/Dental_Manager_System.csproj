@@ -1480,6 +1480,9 @@
     <Content Include="Views\User\UserLogin.cshtml" />
     <Content Include="tsconfig.json" />
     <Content Include="Views\Shared\LayoutClient.cshtml" />
+    <Content Include="Views\Doctor\PatientInformation.cshtml" />
+    <Content Include="Views\Doctor\ViewAppointmentForDoctor.cshtml" />
+    <Content Include="Views\Shared\DoctorLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,7 +9,7 @@ namespace Dental_Manager_System.Controllers
     public class DoctorController : Controller
     {
         // GET: Doctor
-        public ActionResult TrangChuBacSi()
+        public ActionResult ViewAppointmentForDoctor()
         {
             return View();
         }
