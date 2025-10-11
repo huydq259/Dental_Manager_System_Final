@@ -72,8 +72,8 @@ namespace Dental_Manager_System.Controllers
             return View();
         }
 
-        [HttpPost]          
-        public ActionResult CreateAppointment()
+        [HttpGet]          
+        public ActionResult Appointment()
         {
             return View();
         }
