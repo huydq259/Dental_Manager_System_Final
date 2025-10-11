@@ -172,7 +172,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReceptionistController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -182,6 +181,10 @@
     <Compile Include="Migrations\202510091002561_InitAllTables.cs" />
     <Compile Include="Migrations\202510091002561_InitAllTables.Designer.cs">
       <DependentUpon>202510091002561_InitAllTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202510101651549_AddFullNameToAspNetUsers.cs" />
+    <Compile Include="Migrations\202510101651549_AddFullNameToAspNetUsers.Designer.cs">
+      <DependentUpon>202510101651549_AddFullNameToAspNetUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1436,9 +1439,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -1459,16 +1459,16 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\ADMIN\DanhSachBacSi.cshtml" />
-    <Content Include="Views\ADMIN\DanhSachKhachHang.cshtml" />
-    <Content Include="Views\ADMIN\DanhSachNhanVien.cshtml" />
-    <Content Include="Views\ADMIN\Index.cshtml" />
-    <Content Include="Views\ADMIN\LichLamViecBacSi.cshtml" />
-    <Content Include="Views\ADMIN\QuanLyDichVu.cshtml" />
-    <Content Include="Views\ADMIN\QuanLyThuoc.cshtml" />
-    <Content Include="Views\Bacsi\TrangChuBacSi.cshtml" />
-    <Content Include="Views\Letan\TrangChu.cshtml" />
-    <Content Include="Views\Letan\ViewAppointments.cshtml" />
+    <Content Include="Views\Admin\DanhSachBacSi.cshtml" />
+    <Content Include="Views\Admin\DanhSachKhachHang.cshtml" />
+    <Content Include="Views\Admin\DanhSachNhanVien.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\LichLamViecBacSi.cshtml" />
+    <Content Include="Views\Admin\QuanLyDichVu.cshtml" />
+    <Content Include="Views\Admin\QuanLyThuoc.cshtml" />
+    <Content Include="Views\Doctor\TrangChuBacSi.cshtml" />
+    <Content Include="Views\Receptionist\TrangChu.cshtml" />
+    <Content Include="Views\Receptionist\ViewAppointments.cshtml" />
     <Content Include="Views\Shared\ReceptionistLayout.cshtml" />
     <Content Include="Views\Shared\UserLayout.cshtml" />
     <Content Include="Views\User\About.cshtml" />
@@ -1514,6 +1514,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202510091002561_InitAllTables.resx">
       <DependentUpon>202510091002561_InitAllTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202510101651549_AddFullNameToAspNetUsers.resx">
+      <DependentUpon>202510101651549_AddFullNameToAspNetUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
