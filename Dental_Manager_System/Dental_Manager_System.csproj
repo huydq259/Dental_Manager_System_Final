@@ -186,6 +186,14 @@
     <Compile Include="Migrations\202510101651549_AddFullNameToAspNetUsers.Designer.cs">
       <DependentUpon>202510101651549_AddFullNameToAspNetUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202510121557516_FixAppointmentPatientId_And_Relationships.cs" />
+    <Compile Include="Migrations\202510121557516_FixAppointmentPatientId_And_Relationships.Designer.cs">
+      <DependentUpon>202510121557516_FixAppointmentPatientId_And_Relationships.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202510121612302_InitialCreate.cs" />
+    <Compile Include="Migrations\202510121612302_InitialCreate.Designer.cs">
+      <DependentUpon>202510121612302_InitialCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Appointment.cs" />
@@ -1483,6 +1491,9 @@
     <Content Include="Views\Doctor\PatientInformation.cshtml" />
     <Content Include="Views\Doctor\ViewAppointmentForDoctor.cshtml" />
     <Content Include="Views\Shared\DoctorLayout.cshtml" />
+    <Content Include="Views\Receptionist\CreateAppointment.cshtml" />
+    <Content Include="Views\Receptionist\HistoryAppointment.cshtml" />
+    <Content Include="Views\User\History.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1515,19 +1526,25 @@
     <Content Include="Scripts\jquery-3.7.0.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Content\Receptionist\libs\apexcharts\types\apexcharts.d.ts" />
+    <TypeScriptCompile Include="Content\Receptionist\libs\simplebar\dist\simplebar.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Migrations\202510091002561_InitAllTables.resx">
       <DependentUpon>202510091002561_InitAllTables.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202510101651549_AddFullNameToAspNetUsers.resx">
       <DependentUpon>202510101651549_AddFullNameToAspNetUsers.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Content\Receptionist\libs\apexcharts\types\apexcharts.d.ts" />
-    <TypeScriptCompile Include="Content\Receptionist\libs\simplebar\dist\simplebar.d.ts" />
+    <EmbeddedResource Include="Migrations\202510121557516_FixAppointmentPatientId_And_Relationships.resx">
+      <DependentUpon>202510121557516_FixAppointmentPatientId_And_Relationships.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202510121612302_InitialCreate.resx">
+      <DependentUpon>202510121612302_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -18,5 +18,13 @@ namespace Dental_Manager_System.Controllers
         {
             return View();
         }
+        public ActionResult CreateAppointment()
+        {
+            return View();
+        }
+        public ActionResult HistoryAppointment()
+        {
+            return View();
+        }
     }
 }

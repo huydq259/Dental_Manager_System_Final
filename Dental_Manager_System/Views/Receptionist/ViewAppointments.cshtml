@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Dental_Appointment_Manager.Models.Appointment>
+﻿@model IEnumerable<Dental_Manager.System.Models.Appointment>
 @{
     ViewBag.Title = "ViewAppointments";
     Layout = "/Views/Shared/ReceptionistLayout.cshtml";
@@ -9,13 +9,64 @@
             <div class="card-body">
                 <h5 class="card-title fw-semibold mb-4">Danh Sách Lịch Hẹn</h5>
                 <p class="mb-4">Quản lý các lịch hẹn của phòng khám</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                                    <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <button type="submit" class="btn btn-search pe-1">
+                                                    <i class="fa fa-search search-icon"></i>
+                                                </button>
+                                            </div>
+                                            <input type="text"
+                                                   placeholder="Tìm kiếm lịch hẹn ..."
+                                                   class="form-control" />
+                                        </div>
+                                    </nav>
 
-                <!-- Nút để chuyển sang trang tạo lịch hẹn -->
-               
 
-               
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="basic-datatables"
+                                           class="display table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Mã Cuộc hẹn</th>
+                                                <th>Tên bệnh nhân</th>
+                                                <th>Số điện thoại </th>
+                                                <th>Lý do đặt lịch</th>
+                                                <th>Ngày</th>
+                                                <th>Giờ</th>
+                                                <th>Hành động</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>CH001</td>
+                                                <td>Đoàn Quang Huy</td>
+                                                <td>039383883</td>
+                                                <td>Bị sâu răng và muốn trám</td>
+                                                <td>25/10/2025</td>
+                                                <td>2:00pm</td>
+                                                <td>
+                                                    <button style="background-color: #FFFF00; padding: 5px 10px; margin-right: 5px;">Sửa</button>
+                                                    <button style="background-color: #3333FF; color: black; padding: 5px 10px;">Đồng ý</button>
+                                                    <button style="background-color: #FF0000; color: white; padding: 5px 10px;">Hủy</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
