@@ -186,10 +186,23 @@
     <Compile Include="Migrations\202510101651549_AddFullNameToAspNetUsers.Designer.cs">
       <DependentUpon>202510101651549_AddFullNameToAspNetUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202510120927302_addDiagnoisisToAppointment.cs" />
+    <Compile Include="Migrations\202510120927302_addDiagnoisisToAppointment.Designer.cs">
+      <DependentUpon>202510120927302_addDiagnoisisToAppointment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202510121454145_addDiagnoisisTable.cs" />
+    <Compile Include="Migrations\202510121454145_addDiagnoisisTable.Designer.cs">
+      <DependentUpon>202510121454145_addDiagnoisisTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202510130821422_AddAppointmentRela.cs" />
+    <Compile Include="Migrations\202510130821422_AddAppointmentRela.Designer.cs">
+      <DependentUpon>202510130821422_AddAppointmentRela.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Consulation.cs" />
+    <Compile Include="Models\Diagnoisis.cs" />
     <Compile Include="Models\Enums\AppointmentStatus.cs" />
     <Compile Include="Models\Enums\PaymentStatus.cs" />
     <Compile Include="Models\Enums\RoleTitle.cs" />
@@ -1520,6 +1533,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202510101651549_AddFullNameToAspNetUsers.resx">
       <DependentUpon>202510101651549_AddFullNameToAspNetUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202510120927302_addDiagnoisisToAppointment.resx">
+      <DependentUpon>202510120927302_addDiagnoisisToAppointment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202510121454145_addDiagnoisisTable.resx">
+      <DependentUpon>202510121454145_addDiagnoisisTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202510130821422_AddAppointmentRela.resx">
+      <DependentUpon>202510130821422_AddAppointmentRela.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

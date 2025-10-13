@@ -18,11 +18,10 @@ namespace Dental_Manager.System.Models
         public DateTime? CreatedAt { get; set; }
 
         // Quan hệ với Appointment
-        [Required]
         public int AppointmentId { get; set; }
 
         // Quan hệ với Doctor (User)
-
         public long DoctorId { get; set; }
+
     }
 }
