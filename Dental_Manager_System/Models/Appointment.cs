@@ -14,8 +14,8 @@ namespace Dental_Manager.System.Models
         public int AppointmentId { get; set; }
         public DateTime AppointmentDate { get; set; }
         public TimeSpan AppointmentTime { get; set; }
+        
         public AppointmentStatus AppointmentStatus { get; set; }  // Scheduled, Completed, Cancelled
-        public string Reason { get; set; }
         public DateTime CreatedAt { get; set; }
 
 
@@ -25,8 +25,13 @@ namespace Dental_Manager.System.Models
 
         public long DoctorId { get; set; }
 
+        public string FullName { get; set; }
+
+        public string Phone { get; set; }
 
         public long? ReceptionistId { get; set; }
+
+        public string Dianoisis { get; set; }
 
     }
 }
