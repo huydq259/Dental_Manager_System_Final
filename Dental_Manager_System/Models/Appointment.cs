@@ -1,32 +1,25 @@
 ﻿using Dental_Manager.System.Models.Enums;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
-namespace Dental_Manager.System.Models
+namespace Dental_Manager_System.Models
 {
     public class Appointment
     {
         [Key]
         public int AppointmentId { get; set; }
-        public DateTime AppointmentDate { get; set; }
+
+        public DateTime? AppointmentDate { get; set; }
         public TimeSpan AppointmentTime { get; set; }
-        public AppointmentStatus AppointmentStatus { get; set; }  // Scheduled, Completed, Cancelled
+        public AppointmentStatus AppointmentStatus { get; set; } = AppointmentStatus.SCHEDULED; // Sử dụng enum từ Enums
         public string Reason { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public string FullName { get; set; }
+        public string Phone { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-
-        //RELATIONSHIPS
+        // RELATIONSHIPS
         public int PatientId { get; set; }
-
-
         public long DoctorId { get; set; }
-
-
         public long? ReceptionistId { get; set; }
-
     }
 }
