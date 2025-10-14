@@ -20,6 +20,14 @@ namespace Dental_Manager_System.Models
         // RELATIONSHIPS
         public int PatientId { get; set; }
         public long DoctorId { get; set; }
+
+        public string FullName { get; set; }
+
+        public string Phone { get; set; }
+
         public long? ReceptionistId { get; set; }
+
+        public string Dianoisis { get; set; }
+
     }
 }

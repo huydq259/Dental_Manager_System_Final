@@ -39,5 +39,6 @@ namespace Dental_Manager_System.Models
         public DbSet<Patient_Record> Patient_Records { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
+        public DbSet<Diagnoisis> Diagnoisis { get; set; }
     }
 }
