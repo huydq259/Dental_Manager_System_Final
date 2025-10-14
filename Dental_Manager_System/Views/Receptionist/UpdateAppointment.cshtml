@@ -1,0 +1,35 @@
+﻿@model Dental_Manager_System.Models.Appointment
+@{
+    ViewBag.Title = "UpdateAppointment";
+    Layout = "/Views/Shared/ReceptionistLayout.cshtml";
+}
+
+<h2>UpdateAppointment</h2>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm p-4">
+                <form action="@Url.Action("UpdateAppointment", "Receptionist")" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="appointmentId" name="AppointmentId" value="@Model.AppointmentId" />
+                    <div class="mb-3">
+                        <label for="FullName" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="FullName" name="FullName" value="@Model.FullName" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="Phone" class="form-label">Phone</label>
+                        <input type="number" class="form-control" id="Phone" name="Phone" value="@Model.Phone" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="Reason" class="form-label">Reason</label>
+                        <input type="text" class="form-control" id="Reason" name="Reason" value="@Model.Reason" required />
+                    </div>
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <a href="@Url.Action("ViewAppointments", "Receptionist")" class="btn btn-secondary mt-2">Back to List</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

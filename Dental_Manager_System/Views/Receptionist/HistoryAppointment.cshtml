@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Dental_Manager_System.Models.Appointment>
+@using Dental_Manager.System.Models.Enums;
 @{
-    ViewBag.Title = "ViewAppointments";
+    ViewBag.Title = "HistoryAppointment";
     Layout = "/Views/Shared/ReceptionistLayout.cshtml";
     Func<TimeSpan, string> FormatTime = ts =>
        ts == TimeSpan.Zero ? "00:00" :
@@ -10,8 +11,8 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title fw-semibold mb-4">Danh Sách Lịch Hẹn</h5>
-                <p class="mb-4">Quản lý các lịch hẹn của phòng khám</p>
+                <h5 class="card-title fw-semibold mb-4">Lịch sử cuộc hẹn</h5>
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
@@ -61,7 +62,18 @@
                                                         <td>@(item.AppointmentDate?.ToString("dd/MM/yyyy") ?? "Chưa đặt")</td>
                                                         <td>@FormatTime(item.AppointmentTime)</td>
                                                         <td>
-                                                            <span class="badge bg-warning">Lên lịch</span>
+                                                            @if (item.AppointmentStatus == AppointmentStatus.COMPLETED)
+                                                            {
+                                                                <span class="badge bg-success">Đã chấp nhận</span>
+                                                            }
+                                                            else if (item.AppointmentStatus == AppointmentStatus.CANCELLED)
+                                                            {
+                                                                <span class="badge bg-danger">Đã hủy</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="badge bg-warning">Lên lịch</span>
+                                                            }
                                                         </td>
                                                         <td>
                                                             <a href="@Url.Action("UpdateAppointment", "Receptionist", new { id = item.AppointmentId })"
@@ -69,21 +81,26 @@
                                                                 <i class="bi bi-pencil"></i>
                                                             </a>
 
-                                                            <form method="post" action="@Url.Action("ApproveAppointment", "Receptionist", new { id = item.AppointmentId })"
-                                                                  style="display: inline;" onsubmit="return confirm('Xác nhận đồng ý lịch hẹn?')">
-                                                                @Html.AntiForgeryToken()
-                                                                <button type="submit" class="btn btn-primary btn-sm me-1" title="Đồng ý">
-                                                                    <i class="bi bi-check-lg"></i>
-                                                                </button>
-                                                            </form>
-
-                                                            <form method="post" action="@Url.Action("DeleteAppointment", "Receptionist", new { id = item.AppointmentId })"
-                                                                  style="display: inline;" onsubmit="return confirm('Hủy lịch hẹn này?')">
-                                                                @Html.AntiForgeryToken()
-                                                                <button type="submit" class="btn btn-danger btn-sm" title="Hủy">
-                                                                    <i class="bi bi-trash"></i>
-                                                                </button>
-                                                            </form>
+                                                            @if (item.AppointmentStatus == AppointmentStatus.COMPLETED)
+                                                            {
+                                                                <form method="post" action="@Url.Action("RestoreAppointment", "Receptionist", new { id = item.AppointmentId })"
+                                                                      style="display: inline;" onsubmit="return confirm('Khôi phục trạng thái lịch hẹn?')">
+                                                                    @Html.AntiForgeryToken()
+                                                                    <button type="submit" class="btn btn-info btn-sm me-1" title="Khôi phục">
+                                                                        <i class="bi bi-arrow-repeat"></i>
+                                                                    </button>
+                                                                </form>
+                                                            }
+                                                            else
+                                                            {
+                                                                <form method="post" action="@Url.Action("ApproveAppointment", "Receptionist", new { id = item.AppointmentId })"
+                                                                      style="display: inline;" onsubmit="return confirm('Xác nhận đồng ý lịch hẹn?')">
+                                                                    @Html.AntiForgeryToken()
+                                                                    <button type="submit" class="btn btn-primary btn-sm me-1" title="Đồng ý">
+                                                                        <i class="bi bi-check-lg"></i>
+                                                                    </button>
+                                                                </form>
+                                                            }
                                                         </td>
                                                     </tr>
                                                 }
