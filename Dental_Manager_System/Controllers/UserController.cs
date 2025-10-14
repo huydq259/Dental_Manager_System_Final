@@ -95,9 +95,6 @@ namespace Dental_Manager_System.Controllers
 
             return View();
         }
-        public ActionResult History()
-        {
-            return View();
 
         
 
