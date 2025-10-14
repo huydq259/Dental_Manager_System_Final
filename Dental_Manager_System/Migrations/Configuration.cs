@@ -1,10 +1,6 @@
 ﻿namespace Dental_Manager_System.Migrations
 {
-    using Dental_Manager.System.Models.Enums;
-    using Dental_Manager.System.Models;
-    using Dental_Manager_System.Models;
     using System;
-    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -23,6 +19,5 @@
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
         }
-
     }
 }
