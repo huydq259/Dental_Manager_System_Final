@@ -1496,6 +1496,9 @@
     <Content Include="Views\Doctor\PatientInformation.cshtml" />
     <Content Include="Views\Doctor\ViewAppointmentForDoctor.cshtml" />
     <Content Include="Views\Shared\DoctorLayout.cshtml" />
+    <Content Include="Views\Receptionist\CreateAppointment.cshtml" />
+    <Content Include="Views\Receptionist\HistoryAppointment.cshtml" />
+    <Content Include="Views\Receptionist\UpdateAppointment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

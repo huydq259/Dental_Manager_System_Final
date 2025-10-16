@@ -96,29 +96,41 @@ namespace Dental_Manager_System.Controllers
             return View();
         }
 
-        
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Appointment(Appointment appointment)
-        { 
+        {
             if (ModelState.IsValid)
             {
-                
                 appointment.CreatedAt = DateTime.Now;
                 appointment.AppointmentStatus = AppointmentStatus.SCHEDULED;
+
+                // Optional: Set PatientId nếu user đăng nhập
+                // appointment.PatientId = int.Parse(User.Identity.GetUserId()); // Nếu UserId là int
 
                 db.Appointments.Add(appointment);
                 db.SaveChanges();
 
                 TempData["SuccessMessage"] = "Đặt lịch thành công!";
-                return RedirectToAction("Trang_Chu", "User");
+                return RedirectToAction("Trang_Chu", "User"); // Giữ nguyên, user về home; data lưu DB cho receptionist xem
             }
 
+            // Populate lại ViewBag khi invalid
+            ViewBag.DiagnosisList = new SelectList(
+                db.Diagnoisis.Select(d => d.Name).Distinct().ToList()
+            );
 
-            // Nếu ModelState invalid thì load lại danh sách
-            //ViewBag.DiagnosisList = new SelectList(db.Diagnoisis.Select(d => d.Name).Distinct().ToList());
-            //ViewBag.DoctorList = new SelectList(db.Users.Select(u => new { u.UserId, u.FullName }).ToList(), "FullName");
+            ViewBag.DoctorList = new SelectList(
+                db.Users
+                    .Where(u => u.RoleTitle == RoleTitle.DOCTOR)
+                    .Select(u => new { u.UserId, u.FullName })
+                    .ToList(),
+                "UserId",
+                "FullName"
+            );
+
             return View(appointment);
         }
     }
