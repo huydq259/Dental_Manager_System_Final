@@ -2,8 +2,8 @@
 @using Dental_Manager.System.Models.Enums;
 @using System.Web.Mvc
 @{
-    ViewBag.Title = "HistoryAppointment";
-    Layout = "/Views/Shared/ReceptionistLayout.cshtml";
+    ViewBag.Title = "History";
+    Layout = "/Views/Shared/UserLayout.cshtml";
     Func<TimeSpan, string> FormatTime = ts =>
        ts == TimeSpan.Zero ? "00:00" :
        $"{ts.Hours:D2}:{ts.Minutes:D2}";
@@ -50,66 +50,39 @@
                                                     <th>Ngày</th>
                                                     <th>Giờ</th>
                                                     <th>Trạng thái</th>
-                                                    <th>Hành động</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach (var item in Model)
                                                 {
                                                     var doctor = ((SelectList)ViewBag.DoctorList)?.Items
-                                .Cast<SelectListItem>()
-                                .FirstOrDefault(d => d.Value == item.DoctorId.ToString());
-                                                    <tr>
-                                                        <td>@item.AppointmentId</td>
-                                                        <td>@item.FullName</td>
-                                                        <td>@item.Phone</td>
-                                                        <td>@(doctor?.Text ?? "Không xác định")</td>
-                                                        <td>@item.Dianoisis</td>
-                                                        <td>@(item.AppointmentDate.ToString("dd/MM/yyyy") ?? "Chưa đặt")</td>
-                                                        <td>@FormatTime(item.AppointmentTime)</td>
-                                                        <td>
-                                                            @if (item.AppointmentStatus == AppointmentStatus.COMPLETED)
-                                                            {
-                                                                <span class="badge bg-success">Đã chấp nhận</span>
-                                                            }
-                                                            else if (item.AppointmentStatus == AppointmentStatus.CANCELLED)
-                                                            {
-                                                                <span class="badge bg-danger">Đã hủy</span>
-                                                            }
-                                                            else
-                                                            {
-                                                                <span class="badge bg-warning">Lên lịch</span>
-                                                            }
-                                                        </td>
-                                                        <td>
-                                                            <a href="@Url.Action("UpdateAppointment", "Receptionist", new { id = item.AppointmentId })"
-                                                               class="btn btn-warning btn-sm me-1" title="Sửa lịch hẹn">
-                                                                <i class="bi bi-pencil"></i>
-                                                            </a>
-
-                                                            @if (item.AppointmentStatus == AppointmentStatus.COMPLETED)
-                                                            {
-                                                                <form method="post" action="@Url.Action("RestoreAppointment", "Receptionist", new { id = item.AppointmentId })"
-                                                                      style="display: inline;" onsubmit="return confirm('Khôi phục trạng thái lịch hẹn?')">
-                                                                    @Html.AntiForgeryToken()
-                                                                    <button type="submit" class="btn btn-info btn-sm me-1" title="Khôi phục">
-                                                                        <i class="bi bi-arrow-repeat"></i>
-                                                                    </button>
-                                                                </form>
-                                                            }
-                                                            else
-                                                            {
-                                                                <form method="post" action="@Url.Action("ApproveAppointment", "Receptionist", new { id = item.AppointmentId })"
-                                                                      style="display: inline;" onsubmit="return confirm('Xác nhận đồng ý lịch hẹn?')">
-                                                                    @Html.AntiForgeryToken()
-                                                                    <button type="submit" class="btn btn-primary btn-sm me-1" title="Đồng ý">
-                                                                        <i class="bi bi-check-lg"></i>
-                                                                    </button>
-                                                                </form>
-                                                            }
-                                                        </td>
-                                                    </tr>
-                                                }
+.Cast<SelectListItem>()
+.FirstOrDefault(d => d.Value == item.DoctorId.ToString());
+                                <tr>
+                                    <td>@item.AppointmentId</td>
+                                    <td>@item.FullName</td>
+                                    <td>@item.Phone</td>
+                                    <td>@(doctor?.Text ?? "Không xác định")</td>
+                                    <td>@item.Dianoisis</td>
+                                    <td>@(item.AppointmentDate.ToString("dd/MM/yyyy") ?? "Chưa đặt")</td>
+                                    <td>@FormatTime(item.AppointmentTime)</td>
+                                    <td>
+                                        @if (item.AppointmentStatus == AppointmentStatus.COMPLETED)
+                                        {
+                                            <span class="badge bg-success">Đã chấp nhận</span>
+                                        }
+                                        else if (item.AppointmentStatus == AppointmentStatus.CANCELLED)
+                                        {
+                                            <span class="badge bg-danger">Đã hủy</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-warning">Lên lịch</span>
+                                        }
+                                    </td>
+                                    
+                                </tr>
+                            }
                                             </tbody>
                                         </table>
                                     </div>

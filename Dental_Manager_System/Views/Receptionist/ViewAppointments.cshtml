@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Dental_Manager.System.Models.Appointment>
+@using System.Web.Mvc
 @{
     ViewBag.Title = "ViewAppointments";
     Layout = "/Views/Shared/ReceptionistLayout.cshtml";
@@ -43,6 +44,7 @@
                                                     <th>Mã cuộc hẹn</th>
                                                     <th>Tên bệnh nhân</th>
                                                     <th>Số điện thoại</th>
+                                                    <th>Bác sĩ</th>
                                                     <th>Chuẩn đoán</th>
                                                     <th>Ngày</th>
                                                     <th>Giờ</th>
@@ -53,10 +55,15 @@
                                             <tbody>
                                                 @foreach (var item in Model)
                                                 {
+                                                    var doctor = ((SelectList)ViewBag.DoctorList)?.Items
+                                                    .Cast<SelectListItem>()
+                                                    .FirstOrDefault(d => d.Value == item.DoctorId.ToString());
+
                                                     <tr>
                                                         <td>@item.AppointmentId</td>
                                                         <td>@item.FullName</td>
                                                         <td>@item.Phone</td>
+                                                        <td>@(doctor?.Text ?? "Không xác định")</td>
                                                         <td>@item.Dianoisis</td>
                                                         <td>@(item.AppointmentDate.ToString("dd/MM/yyyy") ?? "Chưa đặt")</td>
                                                         <td>@FormatTime(item.AppointmentTime)</td>

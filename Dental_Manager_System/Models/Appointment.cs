@@ -20,8 +20,7 @@ namespace Dental_Manager.System.Models
 
 
         //RELATIONSHIPS
-        public int PatientId { get; set; }
-
+        public long PatientId { get; set; }
 
         public long DoctorId { get; set; }
 

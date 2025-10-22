@@ -66,11 +66,13 @@
                     <li class="nav-item active"><a href="/User/About" class="nav-link">About</a></li>
                     <li class="nav-item active"><a href="/User/Doctor" class="nav-link">Doctor</a></li>
                     <li class="nav-item active"><a href="/User/Treatments" class="nav-link">Treatments</a></li>
-                    <li class="nav-item active"><a href="/User/Pricing" class="nav-link">Pricing</a></li>
+                    <li class="nav-item active"><a href="/User/History" class="nav-link">History</a></li>
                     <li class="nav-item active"><a href="/User/Appointment" class="nav-link">Appointment</a></li>
-                    @if (ViewBag.IsLoggedIn == true)
+                    @if (User.Identity.IsAuthenticated == true)
                     {
+
                         <li class="nav-item active"><a href="@Url.Action("UserLogout", "User")" class="nav-link">Logout</a></li>
+                        <li class="nav-item active"><span class="nav-link">@User.Identity.Name</span></li>
                     }
                     else
                     {

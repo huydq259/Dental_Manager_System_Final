@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "QuanLyDichVu";
+    Layout = "/Views/Shared/LayoutClient.cshtml";
+}
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Dịch vụ phòng khám</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Quản lý dịch vụ</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="fw-bold mb-3">Tạo mới dịch vụ</h3>
+                        <form class="row g-3">
+                            <div class="col-md-6">
+                                <label for="inputEmail4" class="form-label">Mã dịch vụ</label>
+                                <input type="email" class="form-control" id="inputEmail4" placeholder="DV00">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputPassword4" class="form-label">Tên dịch vụ</label>
+                                <input type="password" class="form-control" id="inputPassword4" placeholder="Trồng Implant">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputDetails" class="form-label">Mô tả </label>
+                                <input type="text" class="form-control" id="inputDetails" placeholder="Trồng răng bằng ... ">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputPrice" class="form-label">Giá dịch vụ</label>
+                                <input type="text" class="form-control" id="inputPrice" placeholder="...VND ">
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Thêm + </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Danh sách các dịch vụ đang vận hành</div>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 10px;">
+                <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button type="submit" class="btn btn-search pe-1">
+                                <i class="fa fa-search search-icon"></i>
+                            </button>
+                        </div>
+                        <input type="text"
+                               placeholder="Tìm kiếm dịch vụ ... "
+                               class="form-control" />
+                    </div>
+                </nav>
+
+            </div>
+            <div class="card-body">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-bordered table-head-bg-info table-bordered-bd-info mt-4">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Mã dịch vụ</th>
+                                    <th scope="col">Tên dịch vụ</th>
+                                    <th scope="col">Mô tả</th>
+                                    <th scope="col">Giá dịch vụ</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>DV001</td>
+                                    <td>Trám răng</td>
+                                    <td>Trám răng bằng vật liệu ...</td>
+                                    <td>300.000 VND</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
