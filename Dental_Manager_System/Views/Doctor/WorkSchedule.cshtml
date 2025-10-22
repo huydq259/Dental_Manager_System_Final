@@ -1,0 +1,164 @@
+﻿@model Dental_Manager_System.Models.WorkScheduleViewModel
+
+@{
+    ViewBag.Title = "WorkSchedule";
+    Layout = "/Views/Shared/DoctorLayout.cshtml";
+}
+
+<div class="container">
+    <div class="page-inner">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Lịch làm việc của Bác sĩ</div>
+                <div class="form-group">
+                    <label for="dateSelect">Chọn ngày:</label>
+                    <select id="dateSelect" class="form-control" style="width: 200px; display: inline-block;">
+                        @if (Model.AppointmentDates != null)
+                        {
+                            foreach (var date in Model.AppointmentDates)
+                            {
+                                <option value="@date.Value" @(date.Selected ? "selected" : "")>@date.Text</option>
+                            }
+                        }
+                        else
+                        {
+                            <option value="">Không có ngày nào</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="card-body">
+                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                {
+                    <div class="alert alert-warning">@Model.ErrorMessage</div>
+                }
+                else if (Model.Doctors == null || !Model.Doctors.Any())
+                {
+                    <div class="alert alert-warning">Danh sách bác sĩ không khả dụng hoặc rỗng. Vui lòng kiểm tra lại.</div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Khung giờ</th>
+                                    @foreach (var doctor in Model.Doctors)
+                                    {
+                                        <th>@(doctor.FullName ?? "Không xác định")</th>
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var timeSlots = new[]
+                                    {
+                                        new { Start = "08:00", End = "09:00", Label = "08:00 - 09:00" },
+                                        new { Start = "09:00", End = "10:00", Label = "09:00 - 10:00" },
+                                        new { Start = "10:00", End = "11:00", Label = "10:00 - 11:00" },
+                                        new { Start = "11:00", End = "12:00", Label = "11:00 - 12:00" },
+                                        new { Start = "12:00", End = "13:00", Label = "Nghỉ trưa" },
+                                        new { Start = "13:00", End = "14:00", Label = "13:00 - 14:00" },
+                                        new { Start = "14:00", End = "15:00", Label = "14:00 - 15:00" },
+                                        new { Start = "15:00", End = "16:00", Label = "15:00 - 16:00" },
+                                        new { Start = "16:00", End = "17:00", Label = "16:00 - 17:00" }
+                                    };
+                                }
+                                @foreach (var slot in timeSlots)
+                                {
+                                    <tr>
+                                        <th scope="row">@slot.Label</th>
+                                        @foreach (var doctor in Model.Doctors)
+                                        {
+                                            var appointmentsInSlot = Model.Appointments != null
+                                                ? Model.Appointments.Where(a => a.DoctorId == doctor.UserId &&
+                                                                               a.AppointmentTime >= TimeSpan.Parse(slot.Start) &&
+                                                                               a.AppointmentTime < TimeSpan.Parse(slot.End))
+                                                                    .ToList()
+                                                : new List<Dental_Manager_System.Models.WorkScheduleViewModel.AppointmentInfo>();
+                                            if (appointmentsInSlot.Any())
+                                            {
+                                                var jsonData = Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(appointmentsInSlot));
+                                                <td class="appointment-cell" style="cursor: pointer;" data-appointments="@jsonData">
+                                                    @foreach (var appt in appointmentsInSlot)
+                                                    {
+                                                        <div>@appt.AppointmentId - @appt.FullName</div>
+                                                    }
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td></td>
+                                            }
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal chi tiết cuộc hẹn -->
+<div class="modal fade" id="appointmentModal" tabindex="-1" role="dialog" aria-labelledby="appointmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="appointmentModalLabel">Chi tiết cuộc hẹn</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Mã cuộc hẹn:</strong> <span id="modalAppointmentId"></span></p>
+                <p><strong>Tên bệnh nhân:</strong> <span id="modalFullName"></span></p>
+                <p><strong>Tên bác sĩ:</strong> <span id="modalDoctorName"></span></p>
+                <p><strong>Số điện thoại:</strong> <span id="modalPhone"></span></p>
+                <p><strong>Chuẩn đoán:</strong> <span id="modalDiagnosis"></span></p>
+                <p><strong>Ngày giờ hẹn:</strong> <span id="modalDateTime"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Xử lý sự kiện nhấp vào ô có cuộc hẹn
+            $('.appointment-cell').click(function () {
+                var appointments = $(this).data('appointments');
+                console.log('Appointments data:', appointments); // Debug
+                if (appointments && appointments.length > 0) {
+                    // Lấy thông tin cuộc hẹn đầu tiên
+                    var appt = appointments[0];
+                    console.log('Selected appointment:', appt); // Debug
+                    $('#modalAppointmentId').text(appt.AppointmentId || 'N/A');
+                    $('#modalFullName').text(appt.FullName || 'N/A');
+                    $('#modalDoctorName').text(appt.DoctorName || 'N/A');
+                    $('#modalPhone').text(appt.Phone || 'N/A');
+                    $('#modalDiagnosis').text(appt.Dianoisis || 'N/A');
+                    $('#modalDateTime').text(appt.AppointmentDate ? new Date(appt.AppointmentDate).toLocaleDateString('vi-VN') + ' ' + appt.AppointmentTime : 'N/A');
+                    $('#appointmentModal').modal('show');
+                } else {
+                    console.log('No appointments data found'); // Debug
+                }
+            });
+
+            // Xử lý sự kiện thay đổi ngày
+            $('#dateSelect').change(function () {
+                var selectedDate = $(this).val();
+                if (selectedDate) {
+                    window.location.href = '@Url.Action("WorkSchedule", "Doctor")' + '?selectedDate=' + encodeURIComponent(selectedDate);
+                }
+            });
+        });
+    </script>
+}

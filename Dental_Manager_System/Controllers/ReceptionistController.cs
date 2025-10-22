@@ -10,6 +10,7 @@ using System.Web.Mvc;
 namespace Dental_Manager_System.Controllers
 
 {
+    
     public class ReceptionistController : Controller
     {
         private readonly ApplicationDbContext db = new ApplicationDbContext();
@@ -19,9 +20,21 @@ namespace Dental_Manager_System.Controllers
         {
             return View();
         }
-
         public ActionResult ViewAppointments()
         {
+            ViewBag.DoctorList = new SelectList(
+        db.Users
+            .Where(u => u.RoleTitle == RoleTitle.DOCTOR)
+            .Select(u => new SelectListItem
+            {
+                Value = u.UserId.ToString(),
+                Text = u.FullName
+            })
+            .ToList(),
+        "Value",
+        "Text"
+    );
+
             var appointments = db.Appointments
                 .Where(a => a.AppointmentStatus == AppointmentStatus.SCHEDULED)
                 .ToList();
@@ -85,6 +98,18 @@ namespace Dental_Manager_System.Controllers
 
         public ActionResult HistoryAppointment()
         {
+            ViewBag.DoctorList = new SelectList(
+      db.Users
+          .Where(u => u.RoleTitle == RoleTitle.DOCTOR)
+          .Select(u => new SelectListItem
+          {
+              Value = u.UserId.ToString(),
+              Text = u.FullName
+          })
+          .ToList(),
+      "Value",
+      "Text"
+  );
             var appointments = db.Appointments
                 .Where(a => a.AppointmentStatus == AppointmentStatus.COMPLETED || a.AppointmentStatus == AppointmentStatus.CANCELLED)
                 .ToList();

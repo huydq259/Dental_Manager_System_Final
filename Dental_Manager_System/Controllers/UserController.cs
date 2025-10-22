@@ -51,10 +51,11 @@ namespace Dental_Manager_System.Controllers
 
             // Nếu bạn có UserManager, có thể lấy thông tin chi tiết
             var user = UserManager.FindByName(email);
-
-            ViewBag.UserEmail = email;
+            
+            //ViewBag.UserEmail = email;
             ViewBag.UserFullName = user?.FullName; // nếu model có thuộc tính FullName
-            ViewBag.IsLoggedIn = User.Identity.IsAuthenticated;
+            //ViewBag.IsLoggedIn = User.Identity.IsAuthenticated;
+
             return View();
         }
 
@@ -78,6 +79,7 @@ namespace Dental_Manager_System.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Appointment()
         {
             ViewBag.DiagnosisList = new SelectList(
@@ -91,7 +93,7 @@ namespace Dental_Manager_System.Controllers
             .ToList(),
             "UserId",    
             "FullName"   
-    );
+            );
 
             return View();
         }
@@ -100,6 +102,7 @@ namespace Dental_Manager_System.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Appointment(Appointment appointment)
         {
             if (ModelState.IsValid)
@@ -132,6 +135,14 @@ namespace Dental_Manager_System.Controllers
             );
 
             return View(appointment);
+        }
+        public ActionResult History(Appointment appointment)
+        {
+
+            var appointments = db.Appointments
+                .Where(a => a.AppointmentStatus == AppointmentStatus.COMPLETED || a.AppointmentStatus == AppointmentStatus.CANCELLED)
+                .ToList();
+            return View(appointments);
         }
     }
 }
