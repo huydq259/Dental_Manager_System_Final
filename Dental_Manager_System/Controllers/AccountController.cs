@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Dental_Manager.System.Models.Enums;
+using Dental_Manager_System.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using Dental_Manager_System.Models;
 
 namespace Dental_Manager_System.Controllers
 {
@@ -83,7 +84,18 @@ namespace Dental_Manager_System.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                   return RedirectToAction("Trang_Chu", "User");
+                    var user = await UserManager.FindByEmailAsync(model.Email);
+
+                    var roles = await UserManager.GetRolesAsync(user.Id);
+
+                    if (roles.Contains(RoleTitle.ADMIN.ToString()))
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Trang_Chu", "User");
+                    }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

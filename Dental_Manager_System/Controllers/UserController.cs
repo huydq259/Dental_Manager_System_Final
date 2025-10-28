@@ -53,8 +53,7 @@ namespace Dental_Manager_System.Controllers
             var user = UserManager.FindByName(email);
             
             //ViewBag.UserEmail = email;
-            ViewBag.UserFullName = user?.FullName; // nếu model có thuộc tính FullName
-            //ViewBag.IsLoggedIn = User.Identity.IsAuthenticated;
+            ViewBag.UserFullName = user?.FullName; 
 
             return View();
         }
@@ -139,9 +138,16 @@ namespace Dental_Manager_System.Controllers
         public ActionResult History(Appointment appointment)
         {
 
-            var appointments = db.Appointments
-                .Where(a => a.AppointmentStatus == AppointmentStatus.COMPLETED || a.AppointmentStatus == AppointmentStatus.CANCELLED)
+            var appointments = db.Appointments.ToList();
+
+            // Lọc danh sách bác sĩ
+            var doctors = db.Users
+                .Where(u => u.RoleTitle == RoleTitle.DOCTOR)
                 .ToList();
+
+            // Tạo SelectList đúng cột
+            ViewBag.DoctorList = new SelectList(doctors, "UserId", "FullName");
+
             return View(appointments);
         }
     }
