@@ -55,7 +55,7 @@
                                             <tbody>
                                                 @foreach (var item in Model)
                                                 {
-                                                    var doctor = ((SelectList)ViewBag.DoctorList)?.Items
+                                                    var doctor = ((SelectList)ViewBag.DoctorList)?
 .Cast<SelectListItem>()
 .FirstOrDefault(d => d.Value == item.DoctorId.ToString());
                                 <tr>

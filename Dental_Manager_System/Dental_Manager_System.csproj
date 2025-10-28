@@ -202,6 +202,22 @@
     <Compile Include="Migrations\202510220419277_UpdatePatientIdToLong.Designer.cs">
       <DependentUpon>202510220419277_UpdatePatientIdToLong.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202510250940154_addSeedAdmin.cs" />
+    <Compile Include="Migrations\202510250940154_addSeedAdmin.Designer.cs">
+      <DependentUpon>202510250940154_addSeedAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202510261838523_addRequireUser.cs" />
+    <Compile Include="Migrations\202510261838523_addRequireUser.Designer.cs">
+      <DependentUpon>202510261838523_addRequireUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202510261959215_deteleRequireForBirthday.cs" />
+    <Compile Include="Migrations\202510261959215_deteleRequireForBirthday.Designer.cs">
+      <DependentUpon>202510261959215_deteleRequireForBirthday.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202510270727345_editNullAbleForUserDateTime.cs" />
+    <Compile Include="Migrations\202510270727345_editNullAbleForUserDateTime.Designer.cs">
+      <DependentUpon>202510270727345_editNullAbleForUserDateTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Appointment.cs" />
@@ -1504,13 +1520,12 @@
     <Content Include="Views\Receptionist\HistoryAppointment.cshtml" />
     <Content Include="Views\Receptionist\UpdateAppointment.cshtml" />
     <Content Include="Views\Doctor\WorkSchedule.cshtml" />
-    <Content Include="Views\Admin\admin\DanhSachBacSi.cshtml" />
-    <Content Include="Views\Admin\admin\DanhSachKhachHang.cshtml" />
-    <Content Include="Views\Admin\admin\DanhSachNhanVien.cshtml" />
-    <Content Include="Views\Admin\admin\Index.cshtml" />
-    <Content Include="Views\Admin\admin\LichLamViecBacSi.cshtml" />
-    <Content Include="Views\Admin\admin\QuanLyDichVu.cshtml" />
-    <Content Include="Views\Admin\admin\QuanLyThuoc.cshtml" />
+    <Content Include="Views\Admin\EditDoctor.cshtml" />
+    <Content Include="Views\Admin\DeleteDoctor.cshtml" />
+    <Content Include="Views\Admin\EditReceptionist.cshtml" />
+    <Content Include="Views\Admin\DeleteReceptionist.cshtml" />
+    <Content Include="Views\Admin\EditPatient.cshtml" />
+    <Content Include="Views\Admin\DeletePatient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1560,6 +1575,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202510220419277_UpdatePatientIdToLong.resx">
       <DependentUpon>202510220419277_UpdatePatientIdToLong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202510250940154_addSeedAdmin.resx">
+      <DependentUpon>202510250940154_addSeedAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202510261838523_addRequireUser.resx">
+      <DependentUpon>202510261838523_addRequireUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202510261959215_deteleRequireForBirthday.resx">
+      <DependentUpon>202510261959215_deteleRequireForBirthday.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202510270727345_editNullAbleForUserDateTime.resx">
+      <DependentUpon>202510270727345_editNullAbleForUserDateTime.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

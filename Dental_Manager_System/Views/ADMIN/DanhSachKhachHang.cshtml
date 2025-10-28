@@ -1,164 +1,134 @@
-﻿@{
-    ViewBag.Title = "DanhSachBacSi";
+﻿@model Tuple<Dental_Manager.System.Models.User, List<Dental_Manager.System.Models.User>>
+
+@{
+    ViewBag.Title = "DanhSachKhachHang";
     Layout = "/Views/Shared/LayoutClient.cshtml";
 }
+
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
-
             <ul class="breadcrumbs mb-3">
-                <li class="nav-home">
-                    <a href="#">
-                        <i class="icon-home"></i>
-                    </a>
-                </li>
-                <li class="separator">
-                    <i class="icon-arrow-right"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="#">Quản lý Khách hàng</a>
-                </li>
-                <li class="separator">
-                    <i class="icon-arrow-right"></i>
-                </li>
+                <li class="nav-home"><a href="#"><i class="icon-home"></i></a></li>
+                <li class="separator"><i class="icon-arrow-right"></i></li>
+                <li class="nav-item"><a href="#">Quản lý Bác sĩ</a></li>
             </ul>
         </div>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="fw-bold mb-3">Tạo thông tin Bệnh nhân</h3>
-                        <form class="row g-3">
-                            <div class="col-md-6">
-                                <label for="inputEmail4" class="form-label">Email (Tên tài khoản)</label>
-                                <input type="email" class="form-control" id="inputEmail4" placeholder="ABC@gmail.com">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputPassword4" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="inputPassword4" placeholder="*">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputAddress" class="form-label">Họ và Tên</label>
-                                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St ... ">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="formFileLg" class="form-label">Hình đại diện</label>
-                                <input class="form-control form-control-lg" id="formFileLg" type="file">
-                            </div>
-                            <div class="col-6">
-                                <label for="inputAddress2" class="form-label">Ngày tháng năm sinh</label>
-                                <input type="text" class="form-control" id="inputDate" placeholder="DD/MM/YY...">
-                            </div>
-                            <div class="col-6">
-                                <label for="inputAddress2" class="form-label">Số điện thoại</label>
-                                <input type="text" class="form-control" id="inputPhonenumber" placeholder="+84 ...">
-                            </div>
-                            <div class="col-6">
-                                <label for="inputAddress2" class="form-label">Số CCCD</label>
-                                <input type="text" class="form-control" id="inputCCCD" placeholder="CCCD 9 số hoặc 12 số ...">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputState" class="form-label">Trình độ chuyên môn</label>
-                                <select id="inputState" class="form-select">
-                                    <option selected>Chọn trình độ</option>
-                                    <option>CKI</option>
-                                    <option>CKII</option>
-                                    <option>Thạc sĩ</option>
-                                    <option>Tiến sĩ</option>
-                                    <option>Đại học</option>
-                                    <option>Chứng chỉ hành nghề</option>
+                        <h3 class="fw-bold mb-3">Tạo thông tin cho Khách hàng</h3>
 
-                                </select>
-                            </div>
+                        @using (Html.BeginForm("CreatePatient", "Admin", FormMethod.Post, new { @class = "row g-3" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
                             <div class="col-md-6">
-                                <label for="inputCity" class="form-label">Quản lý dịch vụ</label>
-                                <input type="text" class="form-control" id="inputCity" placeholder="Điền tên dịch vụ ...">
+                                @Html.LabelFor(m => m.Item1.FullName, "Họ và Tên", new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.Item1.FullName, new { @class = "form-control", placeholder = "VD: Nguyễn Văn A..." })
+                                @Html.ValidationMessageFor(m => m.Item1.FullName)
+                            </div>
+
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Item1.Email, "Email", new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.Item1.Email, new { @class = "form-control", placeholder = "VD: abc@gmail.com" })
+                                @Html.ValidationMessageFor(m => m.Item1.Email)
+                            </div>
+
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Item1.Phone, "Số điện thoại", new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.Item1.Phone, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Item1.Phone)
+                            </div>
+
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Item1.Gender, "Giới tính", new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.Item1.Gender, new { @class = "form-control", placeholder = "Nam/Nữ" })
+                            </div>
+
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Item1.DateOfBirth, "Ngày sinh", new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.Item1.DateOfBirth, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                            </div>
+
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Item1.Address, "Địa chỉ", new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.Item1.Address, new { @class = "form-control", placeholder = "123 đường X, phường Y" })
                             </div>
 
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary">Tạo thông tin</button>
                             </div>
-                        </form>
+                        }
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Danh sách bác sĩ -->
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card mt-4">
                     <div class="card-header">
-                        <h3 class="fw-bold mb-3">Danh sách Khách hàng / Bệnh nhân</h3>
-                        <div style="display: flex; gap: 10px; margin-top: 10px;">
-                            <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <button type="submit" class="btn btn-search pe-1">
-                                            <i class="fa fa-search search-icon"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text"
-                                           placeholder="Tìm kiếm Khách hàng ..."
-                                           class="form-control" />
-                                </div>
-                            </nav>
-
-                        </div>
+                        <h3 class="fw-bold mb-3">Danh sách Nhân viên</h3>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="basic-datatables"
-                                   class="display table table-striped table-hover">
-                                <thead>
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tên</th>
+                                    <th>Ngày sinh</th>
+                                    <th>Giới tính</th>
+                                    <th>SĐT</th>
+                                    <th>Email</th>
+                                    <th>Địa chỉ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var patient in Model.Item2)
+                                {
                                     <tr>
-                                        <th>Mã Khách hàng</th>
-                                        <th>Tên Khách hàng</th>
-                                        <th>Năm sinh</th>
-                                        <th>Yêu cầu điều trị</th>
-                                        <th>Hình đại diện</th>
-                                        <th>Hành động</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>KH001</td>
-                                        <td>Đoàn Quang Huy</td>
-                                        <td>2004</td>
-                                        <td>Chữa tủy</td>
-                                        <td>ahihi.png</td>
+                                        <td>@patient.FullName</td>
+                                        <td>@patient.DateOfBirth</td>
+                                        <td>@patient.Gender</td>
+                                        <td>@patient.Phone</td>
+                                        <td>@patient.Email</td>
+                                        <td>@patient.Address</td>
                                         <td>
-                                            <button style="background-color: #FFFF00; padding: 5px 10px; margin-right: 5px;">Sửa</button>
-                                            <button style="background-color: #FF0000; color: white; padding: 5px 10px;">Xóa</button>
+                                            <a href="@Url.Action("EditPatient", "Admin", new { id = patient.UserId })" class="btn btn-warning btn-sm">Sửa</a>
+                                            <a href="@Url.Action("DeletePatient", "Admin", new { id = patient.UserId })" class="btn btn-danger btn-sm">Xóa</a>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>NV002</td>
-                                        <td>Đoàn Quang Huy</td>
-                                        <td>2004</td>
-                                        <td>Nhân viên dọn dẹp</td>
-                                        <td>ahihi.png</td>
-                                        <td>
-                                            <button style="background-color: #FFFF00; padding: 5px 10px; margin-right: 5px;">Sửa</button>
-                                            <button style="background-color: #FF0000; color: white; padding: 5px 10px;">Xóa</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>NV003</td>
-                                        <td>Nguyễn Văn A</td>
-                                        <td>1986</td>
-                                        <td>Quản lý</td>
-                                        <td>.png</td>
-
-                                        <td>
-                                            <button style="background-color: #FFFF00; padding: 5px 10px; margin-right: 5px;">Sửa</button>
-                                            <button style="background-color: #FF0000; color: white; padding: 5px 10px;">Xóa</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                                }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
+
+<script>
+    document.getElementById('searchInput').addEventListener('input', function () {
+        let searchValue = this.value.toLowerCase();
+        let table = document.getElementById('basic-datatables');
+        let rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+        for (let i = 0; i < rows.length; i++) {
+            let row = rows[i];
+            let name = row.getElementsByTagName('td')[1].textContent.toLowerCase();
+            let phone = row.getElementsByTagName('td')[2].textContent.toLowerCase();
+
+            if (name.includes(searchValue) || phone.includes(searchValue)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        }
+    });
+</script>

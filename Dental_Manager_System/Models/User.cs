@@ -1,35 +1,33 @@
-﻿using Dental_Manager.System.Models.Enums;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using Dental_Manager.System.Models.Enums;
 
 namespace Dental_Manager.System.Models
 {
     public class User
     {
-        [Key]
         public long UserId { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Họ tên không được để trống")]
         public string FullName { get; set; }
-        [Required]
-        public DateTime? DateOfBirth { get; set; }
-        [Required]
-        public string Gender { get; set; }
-        [Required]
-        public string Phone { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Email không được để trống")]
+        [EmailAddress(ErrorMessage = "Email không hợp lệ")]
         public string Email { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Số điện thoại không được để trống")]
+        [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
+        public string Phone { get; set; }
+
+        public string Gender { get; set; }
+
+        public DateTime? DateOfBirth { get; set; }
+
         public string Address { get; set; }
-        [Required]
-        public string Password { get; set; }
-        [Required]
+
         public RoleTitle RoleTitle { get; set; }
-        [Required]
-        public DateTime CreatedAt { get; set; }
-        [Required]
-        public DateTime UpdatedAt { get; set; }
+
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }
