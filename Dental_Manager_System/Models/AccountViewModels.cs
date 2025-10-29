@@ -90,6 +90,13 @@ namespace Dental_Manager_System.Models
         public string ConfirmPassword { get; set; }
     }
 
+    public class LoginRegisterViewModel
+    {
+        public RegisterViewModel RegisterView { get; set; }
+        public ExternalLoginListViewModel ExternalLoginList { get; set; }
+    }
+
+
     public class ResetPasswordViewModel
     {
         [Required]

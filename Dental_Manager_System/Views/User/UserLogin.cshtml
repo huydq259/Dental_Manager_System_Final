@@ -26,17 +26,17 @@
                             @Html.AntiForgeryToken()
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.Email, new { @class = "form-label" })
-                            @Html.TextBoxFor(m => m.Email, new
-                       {
-                           @class = "classborder form-control",
-                           placeholder = "Your Email",
-                           style = "border: 1px solid black !important; border-bottom: 1px solid black !important; height: 40px !important; padding-left: 0; padding-right: 0; background: transparent !important; color: rgba(0, 0, 0, 0.9) !important; font-size: 13px; border-radius: 0px; -webkit-box-shadow: none !important; box-shadow: none !important;"
-                       })
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.Email, new
+                           {
+                               @class = "classborder form-control",
+                               placeholder = "Your Email",
+                               style = "border: 1px solid black !important; border-bottom: 1px solid black !important; height: 40px !important; padding-left: 0; padding-right: 0; background: transparent !important; color: rgba(0, 0, 0, 0.9) !important; font-size: 13px; border-radius: 0px; -webkit-box-shadow: none !important; box-shadow: none !important;"
+                           })
 
-                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                        </div>
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
                             <div class="form-group">
                                 @Html.LabelFor(m => m.Password, new { @class = "form-label" })
                                 @Html.PasswordFor(m => m.Password, new
@@ -51,9 +51,24 @@
                             <div class="form-group">
                                 <input type="submit" value="Login" class="btn btn-primary py-3 px-5">
                             </div>
+                            
                             <p>Don't have an account?</p>
                             <p><a class="link-offset-2 link-underline link-underline-opacity-25" href="#" onclick="showRegisterForm()">Register Here</a></p>
                         }
+                    <div>
+                        <section id="socialLoginForm">
+                            <h4>Use another service to log in.</h4>
+                            <hr />
+                            @using (Html.BeginForm("ExternalLogin", "Account", FormMethod.Post))
+                            {
+                                <button type="submit" class="btn btn-outline-dark"
+                                        name="provider" value="Google"
+                                        title="Log in using your Google account">
+                                    Google
+                                </button>
+                            }
+                        </section>
+                    </div>
                     </div>
                     <div id="register-form" style="display: none;">
                         @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "appointment-form" }))
@@ -142,6 +157,7 @@
         </div>
     </div>
 </section>
+
 <script>
     function showRegisterForm() {
         document.getElementById('login-form').style.display = 'none';
@@ -154,3 +170,4 @@
         document.getElementById('form-title').innerText = 'Login';
     }
 </script>
+
