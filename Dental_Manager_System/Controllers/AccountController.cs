@@ -63,8 +63,9 @@ namespace Dental_Manager_System.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return View(new LoginViewModel());
         }
+
 
         //
         // POST: /Account/Login
@@ -291,7 +292,7 @@ namespace Dental_Manager_System.Controllers
         // POST: /Account/ExternalLogin
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
             // Request a redirect to the external login provider
@@ -391,7 +392,7 @@ namespace Dental_Manager_System.Controllers
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToLocal(returnUrl);
+                        return RedirectToAction("Trang_Chu","User");
                     }
                 }
                 AddErrors(result);
@@ -408,7 +409,7 @@ namespace Dental_Manager_System.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Trang_Chu", "User");
         }
 
         //
@@ -465,7 +466,7 @@ namespace Dental_Manager_System.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Trang_Chu", "User");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
