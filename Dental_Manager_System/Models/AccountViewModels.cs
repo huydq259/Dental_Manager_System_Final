@@ -64,10 +64,19 @@ namespace Dental_Manager_System.Models
 
     public class RegisterViewModel
     {
+
+        [Required]
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Phone Number")]
+        public string Phone { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -80,6 +89,13 @@ namespace Dental_Manager_System.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
+
+    public class LoginRegisterViewModel
+    {
+        public RegisterViewModel RegisterView { get; set; }
+        public ExternalLoginListViewModel ExternalLoginList { get; set; }
+    }
+
 
     public class ResetPasswordViewModel
     {

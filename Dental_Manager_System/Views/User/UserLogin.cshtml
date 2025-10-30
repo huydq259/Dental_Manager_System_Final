@@ -1,0 +1,173 @@
+﻿@model Dental_Manager_System.Models.RegisterViewModel
+@{
+    ViewBag.Title = "UserLogin";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+<section class="hero-wrap hero-wrap-2" style="background-image: url(/Content/User/images/bg_1.jpg);" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <h1 class="mb-2 bread">Login or Register</h1>
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Login or Register <i class="ion-ios-arrow-forward"></i></span></p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ftco-section ftco-no-pt ftco-no-pb contact-section">
+    <div class="container">
+        <div class="row d-flex align-items-stretch no-gutters">
+            <div class="col-md-6 p-4 p-md-5 order-md-last bg-light">
+                <div class="title">
+                    <p id="form-title">Login</p>
+                    <div id="login-form">
+                        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "appointment-form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.Email, new
+                           {
+                               @class = "classborder form-control",
+                               placeholder = "Your Email",
+                               style = "border: 1px solid black !important; border-bottom: 1px solid black !important; height: 40px !important; padding-left: 0; padding-right: 0; background: transparent !important; color: rgba(0, 0, 0, 0.9) !important; font-size: 13px; border-radius: 0px; -webkit-box-shadow: none !important; box-shadow: none !important;"
+                           })
+
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+                                @Html.PasswordFor(m => m.Password, new
+                           {
+                               @class = "classborder form-control",
+                               placeholder = "Your Password",
+                               style = "border: 1px solid black !important; border-bottom: 1px solid black !important; height: 40px !important; padding-left: 0; padding-right: 0; background: transparent !important; color: rgba(0, 0, 0, 0.9) !important; font-size: 13px; border-radius: 0px; -webkit-box-shadow: none !important; box-shadow: none !important;"
+                           })
+
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Login" class="btn btn-primary py-3 px-5">
+                            </div>
+                            
+                            <p>Don't have an account?</p>
+                            <p><a class="link-offset-2 link-underline link-underline-opacity-25" href="#" onclick="showRegisterForm()">Register Here</a></p>
+                        }
+                    <div>
+                        <section id="socialLoginForm">
+                            <h4>Use another service to log in.</h4>
+                            <hr />
+                            @using (Html.BeginForm("ExternalLogin", "Account", FormMethod.Post))
+                            {
+                                <button type="submit" class="btn btn-outline-dark"
+                                        name="provider" value="Google"
+                                        title="Log in using your Google account">
+                                    Google
+                                </button>
+                            }
+                        </section>
+                    </div>
+                    </div>
+                    <div id="register-form" style="display: none;">
+                        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "appointment-form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.FullName, new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", placeholder = "Your Full Name" })
+                                @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Your Email" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Phone, new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", placeholder = "Your Phone Number" })
+                                @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Your Password" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "form-label" })
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="Register" class="btn btn-primary py-3 px-5" />
+                            </div>
+
+                            <p>Already have an account?</p>
+                            <p>
+                                <a class="link-offset-2 link-underline link-underline-opacity-25" href="#" onclick="showLoginForm()">
+                                    Login Here
+                                </a>
+                            </p>
+                        }
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6 d-flex align-items-stretch">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4484195377063!2d106.6854109751286!3d10.77692675918428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752fb10d777a5d%3A0xfbb50fc31b82278b!2zTkhBIEtIT0EgVEhJw4pOIELhuqJP!5e0!3m2!1svi!2s!4v1761015275046!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ftco-section contact-section">
+    <div class="container">
+        <div class="row d-flex mb-5 contact-info">
+            <div class="col-md-12 mb-4">
+                <h2 class="h4">Contact Information</h2>
+            </div>
+            <div class="w-100"></div>
+            <div class="col-md-3 d-flex">
+                <div class="bg-light d-flex align-self-stretch box p-4">
+                    <p><span>Address:</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex">
+                <div class="bg-light d-flex align-self-stretch box p-4">
+                    <p><span>Phone:</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex">
+                <div class="bg-light d-flex align-self-stretch box p-4">
+                    <p><span>Email:</span> <a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex">
+                <div class="bg-light d-flex align-self-stretch box p-4">
+                    <p><span>Website</span> <a href="#">yoursite.com</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function showRegisterForm() {
+        document.getElementById('login-form').style.display = 'none';
+        document.getElementById('register-form').style.display = 'block';
+        document.getElementById('form-title').innerText = 'Register';
+    }
+    function showLoginForm() {
+        document.getElementById('register-form').style.display = 'none';
+        document.getElementById('login-form').style.display = 'block';
+        document.getElementById('form-title').innerText = 'Login';
+    }
+</script>
+

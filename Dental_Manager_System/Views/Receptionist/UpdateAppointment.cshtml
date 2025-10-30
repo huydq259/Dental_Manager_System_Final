@@ -1,0 +1,121 @@
+﻿@model Dental_Manager.System.Models.Appointment
+@{
+    ViewBag.Title = "UpdateAppointment";
+    Layout = "/Views/Shared/ReceptionistLayout.cshtml";
+}
+
+
+<div class="container mt-5">
+    
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm p-4">
+                <h2>Cập nhật thông tin lịch hẹn</h2>
+                <form action="@Url.Action("UpdateAppointment", "Receptionist")" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="appointmentId" name="AppointmentId" value="@Model.AppointmentId" />
+                    <div class="mb-3">
+                        <label for="FullName" class="form-label">Tên bệnh nhân</label>
+                        <input type="text" class="form-control" id="FullName" name="FullName" value="@Model.FullName" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="Phone" class="form-label">Số điện thoại</label>
+                        <input type="number" class="form-control" id="Phone" name="Phone" value="@Model.Phone" required />
+                    </div>
+                    <div class="mb-3">
+
+                        <label for="Date" class="form-label">Ngày</label>
+                        @Html.TextBoxFor(m => m.AppointmentDate, new
+                        {
+                            @class = "form-control appointment_date",
+                            @placeholder = "Date",
+                            @required = "required"
+                        })
+                        @Html.ValidationMessageFor(m => m.AppointmentDate, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="mb-3">
+                        <label for="Time" class="form-label">Giờ</label>
+                        <div class="form-group">
+                            @{
+                                var hours = Model.AppointmentTime.Hours;
+                                var minutes = Model.AppointmentTime.Minutes;
+                                var timeString = $"{hours:D2}:{minutes:D2}";
+                            }
+                            @Html.TextBoxFor(m => m.AppointmentTime, new { @class = "form-control appointment_time", @type = "text", @Value = timeString })
+                            @Html.ValidationMessageFor(m => m.AppointmentTime)
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="Dianoisis" class="form-label">Chuẩn đoán</label>
+
+                        @{
+                            var diagnosisList = ViewBag.DiagnosisList as SelectList;
+                        }
+                        @if (diagnosisList != null)
+                        {
+                            @Html.DropDownListFor(
+                                m => m.Dianoisis,
+                                diagnosisList,
+                                "Select Diagnosis",
+                                new { @class = "form-control", required = "required" }
+                            )
+                        }
+                        else
+                        {
+                            <select class="form-control" disabled>
+                                <option>Không có chẩn đoán</option>
+                            </select>
+                        }
+                        @Html.ValidationMessageFor(m => m.Dianoisis, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                        <a href="@Url.Action("ViewAppointments", "Receptionist")" class="btn btn-secondary mt-2">Trở về</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Thêm script flatpickr giống Create -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+@section Scripts {
+    <script>
+        flatpickr(".appointment_date", {
+            dateFormat: "Y-m-d",
+            minDate: "today",
+            defaultDate: "@Model.AppointmentDate.ToString("yyyy-MM-dd")"
+        });
+
+        flatpickr(".appointment_time", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            time_24hr: true,
+            defaultDate: "@timeString",
+            onChange: function(selectedDates, dateStr, instance) {
+                if (dateStr && (dateStr.includes("am") || dateStr.includes("pm"))) {
+                    instance.setDate(dateStr.replace(/am|pm/i, "").trim(), true);
+                }
+            },
+            onClose: function(selectedDates, dateStr, instance) {
+                var input = instance.input;
+                if (dateStr && (dateStr.includes("am") || dateStr.includes("pm"))) {
+                    input.value = dateStr.replace(/am|pm/i, "").trim();
+                }
+            }
+        });
+
+        $("form").submit(function() {
+            var timeInput = $(".appointment_time").val();
+            if (timeInput.includes("am") || timeInput.includes("pm")) {
+                $(".appointment_time").val(timeInput.replace(/am|pm/i, "").trim());
+            }
+        });
+    </script>
+}
