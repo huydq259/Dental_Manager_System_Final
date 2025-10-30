@@ -58,11 +58,11 @@ namespace Dental_Manager_System
             //   appId: "",
             //   appSecret: "");
 
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            {
-                ClientId = "299641413983-nph6td3nb1ma2icsa5l4ghrf6lip5vnv.apps.googleusercontent.com",
-                ClientSecret = "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"
-            });
+            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            //{
+            //    ClientId = "",
+            //    ClientSecret = ""
+            //});
         }
     }
 }
