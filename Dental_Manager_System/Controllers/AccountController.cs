@@ -1,15 +1,14 @@
-﻿using Dental_Manager.System.Models.Enums;
-using Dental_Manager_System.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using System;
+﻿using System;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using Dental_Manager_System.Models;
 
 namespace Dental_Manager_System.Controllers
 {
@@ -19,10 +18,6 @@ namespace Dental_Manager_System.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        //public ActionResult Trang_Chu()
-        //{
-        //    return View();
-        //}
         public AccountController()
         {
         }
@@ -63,9 +58,8 @@ namespace Dental_Manager_System.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View(new LoginViewModel());
+            return View();
         }
-
 
         //
         // POST: /Account/Login
@@ -79,24 +73,13 @@ namespace Dental_Manager_System.Controllers
                 return View(model);
             }
 
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, change to shouldLockout: true
-                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
-                    var user = await UserManager.FindByEmailAsync(model.Email);
-
-                    var roles = await UserManager.GetRolesAsync(user.Id);
-
-                    if (roles.Contains(RoleTitle.ADMIN.ToString()))
-                    {
-                        return RedirectToAction("Index", "Admin");
-                    }
-                    else
-                    {
-                        return RedirectToAction("Trang_Chu", "User");
-                    }
+                    return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -180,7 +163,7 @@ namespace Dental_Manager_System.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Trang_Chu", "User");
+                    return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
@@ -292,7 +275,7 @@ namespace Dental_Manager_System.Controllers
         // POST: /Account/ExternalLogin
         [HttpPost]
         [AllowAnonymous]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
             // Request a redirect to the external login provider
@@ -392,7 +375,7 @@ namespace Dental_Manager_System.Controllers
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToAction("Trang_Chu","User");
+                        return RedirectToLocal(returnUrl);
                     }
                 }
                 AddErrors(result);
@@ -409,7 +392,7 @@ namespace Dental_Manager_System.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Trang_Chu", "User");
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -466,7 +449,7 @@ namespace Dental_Manager_System.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Trang_Chu", "User");
+            return RedirectToAction("Index", "Home");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
